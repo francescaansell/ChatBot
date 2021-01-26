@@ -19,7 +19,7 @@ public class Chatbot {
         
 		//First response		
 		if(nowInputText.toUpperCase().contains("HOW")||nowInputText.toUpperCase().contains("HOW ARE YOU TODAY")) {
-			return "I am doing okay, how are you?" + nowInputText;
+			return "I am doing okay, how are you?";
         }
         
 		//Second response

@@ -1,3 +1,12 @@
+/**
+ * Sources: 
+ * https://stackoverflow.com/questions/42855224/how-to-add-rgb-values-into-setcolor-in-java
+ * https://stackoverflow.com/questions/15393385/how-to-change-text-color-of-a-jbutton
+ * https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html
+ * https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/border.html
+ * https://docs.oracle.com/javase/7/docs/api/javax/swing/text/StyleConstants.html
+ */
 package chatbot;
 
 import java.awt.BorderLayout;
@@ -5,7 +14,11 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -30,21 +43,18 @@ public class ChatbotGUI extends JFrame {
 	static private JScrollPane scroll;
 	
 	static private JButton psuButton;
+
 	
 	public ChatbotGUI(Chatbot nowChatbot) {
 		
 		this.nowChatbot = nowChatbot;
-		
-		/*
-		 * == Task 1: Make the interface prettier! ==
-		 * 
-		 * === Description ===
-		 * As you can see, this graphical interface (GUI) is not quite pretty. Please try to
-		 * modify the following code to move the components around or change their appearance (
-		 * color, size, etc.) to make this interface looks nicer. Please explain what you did in
-		 * your video.
-		 * 
-		 */
+
+		Color blueCrayola = new Color(62, 146, 204);
+		Color royalBlue = new Color(10, 36, 99);
+		Color magnolia = new Color(255, 250, 255);
+		Color cerise = new Color(216, 49, 91);
+		Color blackChocolate = new Color(30, 27, 24);
+	
 		
 		//create the frame of chatbot
 		nowGUIFrame = new JFrame();
@@ -52,60 +62,50 @@ public class ChatbotGUI extends JFrame {
 		nowGUIFrame.setVisible(true);
 		nowGUIFrame.setResizable(false);
 		nowGUIFrame.setLayout(null);
-		nowGUIFrame.setSize(600, 600);
+		nowGUIFrame.setSize(640, 600);
 		nowGUIFrame.setTitle("Chatbot "+nowChatbot.getBotName()+"");
-		
-	
+		nowGUIFrame.getContentPane().setBackground(blueCrayola);
+
+		//TODO: icon image
+		ImageIcon icon = new ImageIcon("resources\sunflower.png");
+		nowGUIFrame.setIconImage(icon.getImage());
+
 		
 		//create JTextPane
 		chatHistoryPane = new JTextPane();
 		nowGUIFrame.add(chatHistoryPane);
-		chatHistoryPane.setSize(500, 400);
-		chatHistoryPane.setLocation(2, 2);
-		chatHistoryPane.setBackground(Color.orange);
+		chatHistoryPane.setSize(600, nowGUIFrame.getHeight()-100);
+		chatHistoryPane.setLocation(10, 5);
+		chatHistoryPane.setBackground(magnolia);
+
+		//TODO: scrollable
 
 		
 		//create JTextField
 		inputTextBox = new JTextField();
 		nowGUIFrame.add(inputTextBox);
-		inputTextBox.setSize(540, 30);
-		inputTextBox.setLocation(2, 410);
+		inputTextBox.setSize(450, 30);
+		inputTextBox.setLocation(10, chatHistoryPane.getHeight() + 10);
 		inputTextBox.addActionListener(new InputTextListener(inputTextBox, chatHistoryPane, this));
-		inputTextBox.setBackground(Color.cyan);
+		inputTextBox.setBackground(magnolia);
+		inputTextBox.setBorder(BorderFactory.createLoweredBevelBorder());
+		inputTextBox.setBackground(magnolia);
+	
 		
-		/*
-		DONE
-		 * == Task 2: Connect the "Send" button to the chatbot and show the response on the chat
-		 * pane. == 
-		 * 
-		 * === Description ===
-		 * For now, clicking the "Send" button shows a message "Send" to the chat pane. Please
-		 * modify the actionPerformed() method in the ButtonListener class so that clicking the
-		 * button will:
-		 * (1) pass the message that the user typed in the input box (the "user message") to the 
-		 * chatbot and receive its response (the "bot response"),
-		 * (2) display "[USER NAME]: [user message]" in the chat pane, and 
-		 * (3) display "[BOT NAME]: [bot response]" in the chat pane.
-		 * 
-		 */
 		
 		//create JButton
-		psuButton = new JButton("Send", null);
+		psuButton = new JButton("Send!", null);
 		nowGUIFrame.add(psuButton);
-		psuButton.setBounds(2, 500, 140, 40);
+		psuButton.setSize(140, 30);
+		psuButton.setLocation(inputTextBox.getWidth() + 20, chatHistoryPane.getHeight() + 10);
 		psuButton.addActionListener(new ButtonListener(inputTextBox, chatHistoryPane, this));
-		
-		/*
-		 * == Task 3: Add a response in Chatbot.java to respond to user message. == 
-		 * 
-		 * === Description ===
-		 * Please modify the getResponse() method in the Chatbot class to respond to at least
-		 * three different user messages meaningfully. I already provided two examples in the
-		 * getResponse().
-		 *   
-		 */
+		psuButton.setBackground(royalBlue);
+		psuButton.setForeground(magnolia);
+		psuButton.setBorder(BorderFactory.createRaisedBevelBorder());
+	
 	    	
 	}
+
 
 	public ChatbotGUI() {
 		
@@ -123,7 +123,8 @@ public class ChatbotGUI extends JFrame {
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color);
 
         aset = sc.addAttribute(aset, StyleConstants.FontFamily, "MONOSPACED");
-        aset = sc.addAttribute(aset, StyleConstants.FontSize, 16);
+		aset = sc.addAttribute(aset, StyleConstants.FontSize, 16);
+		aset = sc.addAttribute(aset, StyleConstants.Bold, true);
         aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
 
         int len = nowPane.getDocument().getLength();
@@ -143,12 +144,20 @@ class ButtonListener implements ActionListener{
 	
 	//private JTextField nowInputTextBox;
 	private JTextPane nowChatHistoryPane;
+
+	Color blueCrayola = new Color(62, 146, 204);
+	Color royalBlue = new Color(10, 36, 99);
+	Color magnolia = new Color(255, 250, 255);
+	Color cerise = new Color(216, 49, 91);
+	Color blackChocolate = new Color(30, 27, 24);
 	
 	public ButtonListener(JTextField inputTextBox, JTextPane chatHistoryPane, ChatbotGUI chatbotUtil) {
 		this.chatbotUtil = chatbotUtil;
 		nowInputTextBox = inputTextBox;
 		nowChatHistoryPane = chatHistoryPane;
 		//nowUserName = userName;
+		
+		
 	}
 
 	@Override
@@ -156,10 +165,10 @@ class ButtonListener implements ActionListener{
 
 		//Used same logic from InputTextListener class  so that when send button is clicked the same action is "enter"
 		String nowInputText = nowInputTextBox.getText();
-		ChatbotGUI.appendToPane(nowChatHistoryPane, chatbotUtil.getChatbot().getUserName(), nowInputText, Color.BLUE);
+		ChatbotGUI.appendToPane(nowChatHistoryPane, chatbotUtil.getChatbot().getUserName(), nowInputText, cerise );
 		
 		String nowChatbotResponse = chatbotUtil.getChatbot().getResponse(nowInputText);
-		ChatbotGUI.appendToPane(nowChatHistoryPane, chatbotUtil.getChatbot().getBotName(), nowChatbotResponse, Color.BLACK);
+		ChatbotGUI.appendToPane(nowChatHistoryPane, chatbotUtil.getChatbot().getBotName(), nowChatbotResponse, blackChocolate);
 		
 		//Reset text box. You can keep this line of code here. 
 		nowInputTextBox.setText("");
@@ -174,6 +183,12 @@ class InputTextListener implements ActionListener{
 	
 	private JTextField nowInputTextBox;
 	private JTextPane nowChatHistoryPane;
+
+	Color blueCrayola = new Color(62, 146, 204);
+	Color royalBlue = new Color(10, 36, 99);
+	Color magnolia = new Color(255, 250, 255);
+	Color cerise = new Color(216, 49, 91);
+	Color blackChocolate = new Color(30, 27, 24);
 	
 	public InputTextListener(JTextField inputTextBox, JTextPane chatHistoryPane, ChatbotGUI chatbotUtil) {
 		this.chatbotUtil = chatbotUtil;
@@ -186,10 +201,10 @@ class InputTextListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		String nowInputText = nowInputTextBox.getText();
-		ChatbotGUI.appendToPane(nowChatHistoryPane, chatbotUtil.getChatbot().getUserName(), nowInputText, Color.BLUE);
+		ChatbotGUI.appendToPane(nowChatHistoryPane, chatbotUtil.getChatbot().getUserName(), nowInputText, cerise);
 		
 		String nowChatbotResponse = chatbotUtil.getChatbot().getResponse(nowInputText);
-		ChatbotGUI.appendToPane(nowChatHistoryPane, chatbotUtil.getChatbot().getBotName(), nowChatbotResponse, Color.BLACK);
+		ChatbotGUI.appendToPane(nowChatHistoryPane, chatbotUtil.getChatbot().getBotName(), nowChatbotResponse, blackChocolate);
 		
 		nowInputTextBox.setText("");
 		
