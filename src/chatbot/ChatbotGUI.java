@@ -1,4 +1,5 @@
 /**
+ * @author Francesca Ansell
  * Sources: 
  * https://stackoverflow.com/questions/42855224/how-to-add-rgb-values-into-setcolor-in-java
  * https://stackoverflow.com/questions/15393385/how-to-change-text-color-of-a-jbutton
@@ -6,6 +7,7 @@
  * https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html
  * https://docs.oracle.com/javase/tutorial/uiswing/components/border.html
  * https://docs.oracle.com/javase/7/docs/api/javax/swing/text/StyleConstants.html
+ * https://docs.oracle.com/javase/7/docs/api/javax/swing/BorderFactory.html
  */
 package chatbot;
 
@@ -14,7 +16,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -67,8 +68,8 @@ public class ChatbotGUI extends JFrame {
 		nowGUIFrame.getContentPane().setBackground(blueCrayola);
 
 		//TODO: icon image
-		ImageIcon icon = new ImageIcon("resources\sunflower.png");
-		nowGUIFrame.setIconImage(icon.getImage());
+		//ImageIcon icon = new ImageIcon("resources\sunflower.ico");
+		//nowGUIFrame.setIconImage(icon.getImage());
 
 		
 		//create JTextPane
@@ -77,9 +78,17 @@ public class ChatbotGUI extends JFrame {
 		chatHistoryPane.setSize(600, nowGUIFrame.getHeight()-100);
 		chatHistoryPane.setLocation(10, 5);
 		chatHistoryPane.setBackground(magnolia);
+		chatHistoryPane.setBorder(BorderFactory.createMatteBorder(2, 2, 8, 8, blackChocolate));
 
 		//TODO: scrollable
-
+	
+		//scroll = new JScrollPane(chatHistoryPane);
+		//scroll.setSize(600, nowGUIFrame.getHeight()-100);
+		//scroll.setLocation(10, 5);
+		//scroll.setBackground(magnolia);
+		//scroll.setBorder(BorderFactory.createMatteBorder(2, 2, 8, 8, blackChocolate));
+		//nowGUIFrame.add(scroll);
+		
 		
 		//create JTextField
 		inputTextBox = new JTextField();
