@@ -110,15 +110,10 @@ public class ChatbotGUI extends JFrame {
 		psuButton.addActionListener(new ButtonListener(inputTextBox, chatHistoryPane, this));
 		psuButton.setBackground(royalBlue);
 		psuButton.setForeground(magnolia);
-		psuButton.setBorder(BorderFactory.createRaisedBevelBorder());
-	
-	    	
+		psuButton.setBorder(BorderFactory.createRaisedBevelBorder());   	
 	}
 
-
-	public ChatbotGUI() {
-		
-	}
+	public ChatbotGUI() {	}
 	
 	public Chatbot getChatbot() {
 		return nowChatbot;
@@ -143,8 +138,7 @@ public class ChatbotGUI extends JFrame {
         
     }
 	
-	
-}//end ChatbotGUI
+}
 
 class ButtonListener implements ActionListener{
 	
@@ -165,8 +159,6 @@ class ButtonListener implements ActionListener{
 		nowInputTextBox = inputTextBox;
 		nowChatHistoryPane = chatHistoryPane;
 		//nowUserName = userName;
-		
-		
 	}
 
 	@Override
@@ -181,9 +173,7 @@ class ButtonListener implements ActionListener{
 		
 		//Reset text box. You can keep this line of code here. 
 		nowInputTextBox.setText("");
-		
 	}
-	
 }
 
 class InputTextListener implements ActionListener{
@@ -218,7 +208,5 @@ class InputTextListener implements ActionListener{
 		nowInputTextBox.setText("");
 		
 	}
-	
-	
 }
 

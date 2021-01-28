@@ -3,7 +3,7 @@ package chatbot;
 public class Chatbot {
 	
 	private String userName = "Francesca Ansell";
-	private String botName = "TestBot";
+	private String botName = "UltimateChatotBot";
 	
 	public Chatbot(String userName, String botName) {
 		this.userName = userName;
