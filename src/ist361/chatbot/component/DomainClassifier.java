@@ -12,7 +12,8 @@ public class DomainClassifier {
 	 * Task 1-1: Initialize the domain dictionary (you MUST have an "Other" domain)
 	 */
 	private void initializeDomainDictionary() {
-		domainDictionary = new String[]{"Other", "Weather", "Food"};
+		//domainDictionary = new String[]{"Other", "Weather", "Food"};
+		domainDictionary = new String[]{"Other", "Healthcare", "User"};
 		System.out.print("Domains: (");
 		for(int i=0;i<domainDictionary.length;i++) {
 			System.out.print(domainDictionary[i]);
@@ -53,7 +54,7 @@ public class DomainClassifier {
 		}
 		*/ 
 
-		//Example from class video 
+		/*Example from class video 
 		String[] weatherDictionary = new String[] {"snow", "rain", "weather"};
 		for(String weatherKeyword: weatherDictionary) {
 			if (nowInputText.toLowerCase().indexOf(weatherKeyword)>=0) {
@@ -64,6 +65,21 @@ public class DomainClassifier {
 		String[] foodDictionary = new String[] {"food", "eat", "hungry"};
 		for(String foodKeyword: foodDictionary) {
 			if (nowInputText.toLowerCase().indexOf(foodKeyword)>=0) {
+				scoreArray[2] = new Double(scoreArray[2])+1;
+			}
+		}
+		*/
+
+		String[] healthcareDictionary = new String[] {"appointment", "refill", "prescription", "doctor"};
+		for(String healthcareKeyword: healthcareDictionary) {
+			if (nowInputText.toLowerCase().indexOf(healthcareKeyword)>=0) {
+				scoreArray[1] = new Double(scoreArray[1])+1;
+			}
+		}
+
+		String[] userDictionary = new String[] {"name", "birthday"};
+		for(String userKeyword: userDictionary) {
+			if (nowInputText.toLowerCase().indexOf(userKeyword)>=0) {
 				scoreArray[2] = new Double(scoreArray[2])+1;
 			}
 		}

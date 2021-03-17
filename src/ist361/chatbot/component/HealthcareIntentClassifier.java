@@ -1,10 +1,10 @@
 package ist361.chatbot.component;
 
-public class FoodIntentClassifier {
+public class HealthcareIntentClassifier {
 	
 	private static String[] intentDictionary;
 	
-	public FoodIntentClassifier() {
+	public HealthcareIntentClassifier() {
 		initializeIntentDictionary();
 	}
 	
@@ -12,7 +12,8 @@ public class FoodIntentClassifier {
 	 * Task 2-1: Initialize the intent dictionary
 	 */
 	private void initializeIntentDictionary() {
-		intentDictionary = new String[]{"FindFood", "OrderFood"};
+		intentDictionary = new String[]{"Appointment", "Refill","FindPhysican" };
+        
 		System.out.print("Intents: (");
 		for(int i=0;i<intentDictionary.length;i++) {
 			System.out.print(intentDictionary[i]);
@@ -34,19 +35,32 @@ public class FoodIntentClassifier {
 	 * with *highest* score. 
 	 */
 	private Double[] calculateIntentScores(String nowInputText) {
-		//do not change the following 4 lines
 		Double[] scoreArray = new Double[intentDictionary.length];
-		for(Double nowValue: scoreArray) {
-			nowValue = 0.0;
+        for(int i=0; i < scoreArray.length; i++){
+            scoreArray[i] = new Double(0.0);
+        }
+
+        String[] appointmentDictionary  = new String[] {"appointment", "sceduale"};
+		for(String appointmentKeyword: appointmentDictionary) {
+			if (nowInputText.toLowerCase().indexOf(appointmentKeyword)>=0) {
+				scoreArray[0] = new Double(scoreArray[0])+1;
+			}
+		}
+
+		String[] refillDictionary = new String[] {"refill", "prescription"};
+		for(String refillKeyword: refillDictionary) {
+			if (nowInputText.toLowerCase().indexOf(refillKeyword)>=0) {
+				scoreArray[1] = new Double(scoreArray[1])+1;
+			}
 		}
 	
-		//The following is the part you need to modify. 
-		//This current version just assign random values to each intent.
-		for(int i=0;i<scoreArray.length;i++) {
-			scoreArray[i] = Math.random();
+        String[] findPhysicanDictionary = new String[] {"doctor"};
+		for(String findPhyiscanKeyword: findPhysicanDictionary) {
+			if (nowInputText.toLowerCase().indexOf(findPhyiscanKeyword)>=0) {
+				scoreArray[2] = new Double(scoreArray[2])+1;
+			}
 		}
-		
-		//do not change the following lines
+
 		if(scoreArray.length!=intentDictionary.length) {
 			System.err.println("The score array size does not equal to the intent array size.");
 			System.exit(1);
@@ -82,5 +96,4 @@ public class FoodIntentClassifier {
 		System.out.println(")");
 		return intentDictionary[nowMaxIndex];
 	}
-
 }

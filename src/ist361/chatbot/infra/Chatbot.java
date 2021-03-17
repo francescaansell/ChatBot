@@ -1,20 +1,18 @@
 package ist361.chatbot.infra;
 
 import ist361.chatbot.component.DomainClassifier;
-import ist361.chatbot.component.FoodIntentClassifier;
-import ist361.chatbot.component.WeatherIntentClassifier;
+import ist361.chatbot.component.HealthcareIntentClassifier;
+import ist361.chatbot.component.UserIntentClassifier;
 
 public class Chatbot {
 	
 	private String userName = "Francesca Ansell";
 	private String botName = "HealthBot";
 	
-	//one domain classifier
 	private DomainClassifier nowDomainClassifier;
 	
-	//each domain has one intent classifier 
-	private WeatherIntentClassifier weatherIntentClassifier;
-	private FoodIntentClassifier foodIntentClassifier;
+	private HealthcareIntentClassifier healthcareIntentClassifier;
+	private UserIntentClassifier userIntentClassifier;
 	
 	public Chatbot(String userName, String botName) {
 		
@@ -23,9 +21,8 @@ public class Chatbot {
 		
 		this.nowDomainClassifier = new DomainClassifier();
 		
-		this.weatherIntentClassifier = new WeatherIntentClassifier();
-		this.foodIntentClassifier = new FoodIntentClassifier();
-		
+		this.healthcareIntentClassifier = new HealthcareIntentClassifier();
+		this.userIntentClassifier = new UserIntentClassifier();	
 	}
 	
 	public String getResponse(String nowInputText) {
@@ -35,14 +32,16 @@ public class Chatbot {
 		String nowDomain = nowDomainClassifier.getLabel(nowInputText);
 		System.out.println("Domain: "+nowDomain);
 		if(!nowDomain.equals("Other")) {//in-domain message
-			if(nowDomain.equals("Food")) {//Food domain
-				String nowIntent = foodIntentClassifier.getLabel(nowInputText);
+			System.out.println("Check1");
+			if(nowDomain.equals("Healthcare")) {//Healthcare domain
+				String nowIntent = healthcareIntentClassifier.getLabel(nowInputText);
 				String nowResponse = "domain = "+nowDomain+", intent = "+nowIntent;
 				return nowResponse;
-			}else if(nowDomain.equals("Weather")) {//Weather domain
-				String nowIntent = weatherIntentClassifier.getLabel(nowInputText);
+			}else if(nowDomain.equals("User")) {//User domain
+				String nowIntent = userIntentClassifier.getLabel(nowInputText);
 				String nowResponse = "domain = "+nowDomain+", intent = "+nowIntent;
 				return nowResponse;
+				
 			}else {//this shouldn't happen
 				System.err.println("Domain name is incorrect!");
 				System.exit(1);
@@ -69,9 +68,4 @@ public class Chatbot {
 	public void setBotName(String botName) {
 		this.botName = botName;
 	}
-
-	
-	
-	
-
 }

@@ -1,10 +1,10 @@
 package ist361.chatbot.component;
 
-public class WeatherIntentClassifier {
+public class UserIntentClassifier {
 	
 	private static String[] intentDictionary;
 	
-	public WeatherIntentClassifier() {
+	public UserIntentClassifier() {
 		initializeIntentDictionary();
 	}
 	
@@ -12,7 +12,7 @@ public class WeatherIntentClassifier {
 	 * Task 2-1: Initialize the intent dictionary
 	 */
 	private void initializeIntentDictionary() {
-		intentDictionary = new String[]{"WeatherReport", "Snow", "Rain"};
+		intentDictionary = new String[]{"info"};
 		System.out.print("Intents: (");
 		for(int i=0;i<intentDictionary.length;i++) {
 			System.out.print(intentDictionary[i]);
@@ -36,14 +36,22 @@ public class WeatherIntentClassifier {
 	private Double[] calculateIntentScores(String nowInputText) {
 		//do not change the following 4 lines
 		Double[] scoreArray = new Double[intentDictionary.length];
-		for(Double nowValue: scoreArray) {
-			nowValue = 0.0;
-		}
+		for(int i=0; i < scoreArray.length; i++){
+            scoreArray[i] = new Double(0.0);
+        }
 	
 		//The following is the part you need to modify. 
-		//This current version just assign random values to each intent.
+		/* This current version just assign random values to each intent.
 		for(int i=0;i<scoreArray.length;i++) {
 			scoreArray[i] = Math.random();
+		}
+        */
+
+        String[] infoDictionary  = new String[] {"name", "birthday"};
+		for(String infoKeyword: infoDictionary) {
+			if (nowInputText.toLowerCase().indexOf(infoKeyword)>=0) {
+				scoreArray[0] = new Double(scoreArray[0])+1;
+			}
 		}
 		
 		//do not change the following lines
