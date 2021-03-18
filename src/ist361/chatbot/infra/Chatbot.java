@@ -2,7 +2,6 @@ package ist361.chatbot.infra;
 
 import ist361.chatbot.component.DomainClassifier;
 import ist361.chatbot.component.HealthcareIntentClassifier;
-import ist361.chatbot.component.UserIntentClassifier;
 
 public class Chatbot {
 	
@@ -12,7 +11,7 @@ public class Chatbot {
 	private DomainClassifier nowDomainClassifier;
 	
 	private HealthcareIntentClassifier healthcareIntentClassifier;
-	private UserIntentClassifier userIntentClassifier;
+	
 	
 	public Chatbot(String userName, String botName) {
 		
@@ -22,7 +21,7 @@ public class Chatbot {
 		this.nowDomainClassifier = new DomainClassifier();
 		
 		this.healthcareIntentClassifier = new HealthcareIntentClassifier();
-		this.userIntentClassifier = new UserIntentClassifier();	
+	
 	}
 	
 	public String getResponse(String nowInputText) {
@@ -36,12 +35,7 @@ public class Chatbot {
 			if(nowDomain.equals("Healthcare")) {//Healthcare domain
 				String nowIntent = healthcareIntentClassifier.getLabel(nowInputText);
 				String nowResponse = "domain = "+nowDomain+", intent = "+nowIntent;
-				return nowResponse;
-			}else if(nowDomain.equals("User")) {//User domain
-				String nowIntent = userIntentClassifier.getLabel(nowInputText);
-				String nowResponse = "domain = "+nowDomain+", intent = "+nowIntent;
-				return nowResponse;
-				
+				return nowResponse;	
 			}else {//this shouldn't happen
 				System.err.println("Domain name is incorrect!");
 				System.exit(1);

@@ -9,7 +9,7 @@ public class HealthcareIntentClassifier {
 	}
 	
 	/*
-	 * Task 2-1: Initialize the intent dictionary
+	 * Initialize the intent dictionary
 	 */
 	private void initializeIntentDictionary() {
 		intentDictionary = new String[]{"Appointment", "Refill","FindPhysican" };
@@ -25,7 +25,7 @@ public class HealthcareIntentClassifier {
 	}
 	
 	/*
-	 * Task 2-2: Calculate the score for each intent
+	 * Calculate the score for each intent
 	 * 
 	 * [Input] One user message
 	 * 
@@ -40,6 +40,7 @@ public class HealthcareIntentClassifier {
             scoreArray[i] = new Double(0.0);
         }
 
+		//Intent 1 appointment
         String[] appointmentDictionary  = new String[] {"appointment", "sceduale"};
 		for(String appointmentKeyword: appointmentDictionary) {
 			if (nowInputText.toLowerCase().indexOf(appointmentKeyword)>=0) {
@@ -47,13 +48,15 @@ public class HealthcareIntentClassifier {
 			}
 		}
 
+		//Intent 2 refill
 		String[] refillDictionary = new String[] {"refill", "prescription"};
 		for(String refillKeyword: refillDictionary) {
 			if (nowInputText.toLowerCase().indexOf(refillKeyword)>=0) {
 				scoreArray[1] = new Double(scoreArray[1])+1;
 			}
 		}
-	
+		
+		//Intent 3 findPhysican
         String[] findPhysicanDictionary = new String[] {"doctor"};
 		for(String findPhyiscanKeyword: findPhysicanDictionary) {
 			if (nowInputText.toLowerCase().indexOf(findPhyiscanKeyword)>=0) {
