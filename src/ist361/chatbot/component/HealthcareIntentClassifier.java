@@ -57,7 +57,7 @@ public class HealthcareIntentClassifier {
 		}
 		
 		//Intent 3 findPhysican
-        String[] findPhysicanDictionary = new String[] {"doctor"};
+        String[] findPhysicanDictionary = new String[] {"doctor", "find a doctor"};
 		for(String findPhyiscanKeyword: findPhysicanDictionary) {
 			if (nowInputText.toLowerCase().indexOf(findPhyiscanKeyword)>=0) {
 				scoreArray[2] = new Double(scoreArray[2])+1;

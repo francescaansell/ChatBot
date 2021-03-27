@@ -12,7 +12,6 @@ public class DomainClassifier {
 	 * Initialize the domain dictionary (you MUST have an "Other" domain)
 	 */
 	private void initializeDomainDictionary() {
-		//domainDictionary = new String[]{"Other", "Weather", "Food"};
 		domainDictionary = new String[]{"Other", "Healthcare"};
 		System.out.print("Domains: (");
 		for(int i=0;i<domainDictionary.length;i++) {
