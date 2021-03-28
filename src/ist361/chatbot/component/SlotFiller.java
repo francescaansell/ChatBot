@@ -73,9 +73,20 @@ public class SlotFiller {
 			"Prednisone", "Flomax", "Potassium", "Clopidogrel", "Klonopin", "Zolpidem", "Tramadol", "Rosuvastatin", "Meloxicam", "Propranolol", "Glipizide", "Zantac", 
 			"Zithromax", "Cymbalta" , "Methylphenidate"};
 		for(String nowRelativePrescription: relativePrescriptionList) {
-			if(nowInputText.toUpperCase().contains(nowRelativePrescription)) {
+			if(nowInputText.toUpperCase().contains(nowRelativePrescription.toUpperCase())) {
 				//adding value to the result hash table
 				result.put("RelativePrescription", nowRelativePrescription);
+			}
+		}
+
+		//I used common Ph
+		String[] relativeSpecialties = new String[] {"Family", "Internal Medicine", "Pediatrician", "Gynecologist", "Surgeon", "Psychiatrist", "Cardiologist", 
+			"Dermatologist", "Endocrinologist", "Gastroenterologist", "Infectious Disease", "Nephrologist", "Ophthalmaologist", "Otaolargyngologist", "Pulmonologist", 
+			"Neurologist", "Oncologist" };
+		for(String nowRelativeSpecialty: relativeSpecialties) {
+			if(nowInputText.toUpperCase().contains(nowRelativeSpecialty.toUpperCase())) {
+				//adding value to the result hash table
+				result.put("RelativeSpecialty", nowRelativeSpecialty);
 			}
 		}
 		
