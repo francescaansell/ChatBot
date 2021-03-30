@@ -43,7 +43,7 @@ public class HealthcareIntentClassifier {
 		//Intent 1 appointment
         String[] appointmentDictionary  = new String[] {"appointment", "sceduale"};
 		for(String appointmentKeyword: appointmentDictionary) {
-			if (nowInputText.toLowerCase().indexOf(appointmentKeyword)>=0) {
+			if (nowInputText.toLowerCase().indexOf(appointmentKeyword.toLowerCase())>=0) {
 				scoreArray[0] = new Double(scoreArray[0])+1;
 			}
 		}
@@ -51,15 +51,17 @@ public class HealthcareIntentClassifier {
 		//Intent 2 refill
 		String[] refillDictionary = new String[] {"refill", "prescription"};
 		for(String refillKeyword: refillDictionary) {
-			if (nowInputText.toLowerCase().indexOf(refillKeyword)>=0) {
+			if (nowInputText.toLowerCase().indexOf(refillKeyword.toLowerCase())>=0) {
 				scoreArray[1] = new Double(scoreArray[1])+1;
 			}
 		}
 		
 		//Intent 3 findPhysican
-        String[] findPhysicanDictionary = new String[] {"doctor", "find a doctor"};
+        String[] findPhysicanDictionary = new String[] {"doctor", "find a doctor", "Family", "Primary Care", "Internal Medicine", "Pediatrician", "Gynecologist", "Surgeon", "Psychiatrist", "Cardiologist", 
+		"Dermatologist", "Endocrinologist", "Gastroenterologist", "Infectious Disease", "Nephrologist", "Ophthalmaologist", "Otaolargyngologist", "Pulmonologist", 
+		"Neurologist", "Oncologist"};
 		for(String findPhyiscanKeyword: findPhysicanDictionary) {
-			if (nowInputText.toLowerCase().indexOf(findPhyiscanKeyword)>=0) {
+			if (nowInputText.toLowerCase().indexOf(findPhyiscanKeyword.toLowerCase())>=0) {
 				scoreArray[2] = new Double(scoreArray[2])+1;
 			}
 		}

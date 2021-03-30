@@ -41,9 +41,11 @@ public class DomainClassifier {
 			scoreArray[i] = new Double(0.0);
 		}
 
-		String[] healthcareDictionary = new String[] {"appointment", "refill", "prescription", "doctor", "schedule"};
+		String[] healthcareDictionary = new String[] {"appointment", "refill", "prescription", "doctor", "schedule", "Family Doctor", "Primary Care", "Internal Medicine", "Pediatrician", "Gynecologist", "Surgeon", "Psychiatrist", "Cardiologist", 
+		"Dermatologist", "Endocrinologist", "Gastroenterologist", "Infectious Disease", "Nephrologist", "Ophthalmaologist", "Otaolargyngologist", "Pulmonologist", 
+		"Neurologist", "Oncologist"};
 		for(String healthcareKeyword: healthcareDictionary) {
-			if (nowInputText.toLowerCase().indexOf(healthcareKeyword)>=0) {
+			if (nowInputText.toLowerCase().indexOf(healthcareKeyword.toLowerCase())>=0) {
 				scoreArray[1] = new Double(scoreArray[1])+1;
 			}
 		}
