@@ -72,6 +72,7 @@ public class ChatbotGUI extends JFrame {
 		chatHistoryPane.setLocation(10, 5);
 		chatHistoryPane.setBackground(magnolia);
 		chatHistoryPane.setBorder(BorderFactory.createMatteBorder(2, 2, 8, 8, blackChocolate));
+	
 
 		//TODO: scrollable
 	

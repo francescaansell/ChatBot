@@ -40,9 +40,14 @@ public class SlotFiller {
 		}
 	
 
-		//modify the following code to implement your own slot extractor
-		String[] relativeCitiesList = new String[] {"State College", "Pittsburgh", "Harrisburg", "Erie", "Butler", "Greensburg", "Lancaster", 
-			"New Castle", "Scranton", "York", "Uniontown"};
+		//Cities in PA (for now could always extend to other states later)
+		//https://en.wikipedia.org/wiki/List_of_cities_in_Pennsylvania
+		String[] relativeCitiesList = new String[] {"Philadelphia" , "Pittsburgh", "Allentown", "Erie", "Reading", "Bethlehem", "Scranton", 
+			"Lancaster", "Harrisburgh", "York", "Altoona", "Wildes-Barre", "Chester", "Williamsport", "McCandless", "Easton", "Lebanon", "Hazleton", 
+			"New Castle", "Johnstown", "McKeesport", "Hermitage", "Hermitage", "Bloomsburg", "Greensburg", "Washington", "Pottsvilla", "Sharon", "Coatesvilla", 
+			"Butler", "Meadville", "New Kensington", "St. Marys", "Lower Burrell", "Nanticoke", "Oil City", "Uniontown", "Sunburry", "Lock Haven", "Warren", 
+			"Jeannette", "Aligquippa", "Du Bois", "Carbondale", "Latrobe", "Beaver Falls", "Bradford", "Pittston", "connellsville", "Monessen", "Shamokin", 
+			"Clariton", "Corry", "Franklin", "Duqeusne", "Titusville", "Arnold", "Farrell", "Monongahela", "Parker"};
 		for(String nowRelativeLocation: relativeCitiesList) {
 			if(nowInputText.toUpperCase().contains(nowRelativeLocation.toUpperCase())) {
 				//adding value to the result hash table
@@ -50,13 +55,8 @@ public class SlotFiller {
 			}
 		}
 
-		
+		//Generates and checks against a list of dates in mm/dd/yyyy format
 		ArrayList<String> relativeDatesList = generateDates();
-		/*
-		for(String date: relativeDatesList){
-			System.out.println("DATE: " + date);
-		}
-		*/
 		for(String nowRelativeDate: relativeDatesList) {
 			if(nowInputText.toUpperCase().contains(nowRelativeDate)) {
 				//adding value to the result hash table
@@ -79,7 +79,8 @@ public class SlotFiller {
 			}
 		}
 
-		//I used common Ph
+		//I used most common specialties
+		//https://www.verywellhealth.com/types-of-doctors-1736311
 		String[] relativeSpecialties = new String[] {"Family", "Internal Medicine", "Pediatrician", "Gynecologist", "Surgeon", "Psychiatrist", "Cardiologist", 
 			"Dermatologist", "Endocrinologist", "Gastroenterologist", "Infectious Disease", "Nephrologist", "Ophthalmaologist", "Otaolargyngologist", "Pulmonologist", 
 			"Neurologist", "Oncologist" };
@@ -102,17 +103,19 @@ public class SlotFiller {
 		for(int tempYear= 1960; tempYear <= 2021; tempYear ++) {
 			for(int tempMonth=1; tempMonth<=12; tempMonth++){
 				if(tempMonth == 2){
+					//Febuary has 28 days
 					for(int tempDay=1; tempDay<=28; tempDay ++){
 						String tempDate = tempMonth + "/" + tempDay + "/" + tempYear;
 						dates.add(tempDate);
 					}
 				} else if(tempMonth % 2 != 0 ){
-					//if month is odd it has 31 days
+					//if a month is odd it has 31 days
 					for(int tempDay=1; tempDay<= 31; tempDay++){
 						String tempDate = tempMonth + "/" + tempDay + "/" + tempYear;
 						dates.add(tempDate);
 					}
 				} else if (tempMonth % 2 ==0){
+					//if a month is even it has 30 days
 					for(int tempDay = 1; tempDay<=30; tempDay++){
 						String tempDate = tempMonth + "/" + tempDay + "/" + tempYear;
 						dates.add(tempDate);
