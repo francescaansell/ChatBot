@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import ist361.chatbot.component.DomainClassifier;
 import ist361.chatbot.component.HealthcareIntentClassifier;
 import ist361.chatbot.component.SlotFiller;
+import ist361.chatbot.component.DialogueManager;
 public class Chatbot {
 	
 	private String userName = "Francesca Ansell";
@@ -15,6 +16,8 @@ public class Chatbot {
 	private HealthcareIntentClassifier healthcareIntentClassifier;
 
 	private SlotFiller nowSlotFiller;
+
+	private DialogueManager nowDialogueManager;
 	
 	
 	public Chatbot(String userName, String botName) {
@@ -36,13 +39,15 @@ public class Chatbot {
 		System.out.println("User Message: "+nowInputText);
 		String nowDomain = nowDomainClassifier.getLabel(nowInputText);
 		System.out.println("Domain: "+nowDomain);
+		String nowIntent = "";
+		Hashtable<String, String> extractedSlotValues = null;
 		if(!nowDomain.equals("Other")) {//in-domain message
 
-			Hashtable<String, String> extractedSlotValues = nowSlotFiller.extractSlotValues(nowInputText);
+			extractedSlotValues = nowSlotFiller.extractSlotValues(nowInputText);
 
 			if(nowDomain.equals("Healthcare")) {//Healthcare domain
 
-				String nowIntent = healthcareIntentClassifier.getLabel(nowInputText);
+				nowIntent = healthcareIntentClassifier.getLabel(nowInputText);
 				String nowResponse = "domain = "+nowDomain+", intent = "+nowIntent;
 				nowResponse += slotTableToString(extractedSlotValues);
 				return nowResponse;	
@@ -53,20 +58,18 @@ public class Chatbot {
 
 			}
 		}else {//out-of-domain message
-			return "This message is out of the domains of the chatbot.";
+			//return "This message is out of the domains of the chatbot.";
 		}
+
+		//Dialogue Management
+		String nextState = nowDialogueManager.getNextState(nowDomain, nowIntent, extractedSlotValues);
+		String nowResponse = nowDialogueManager.executeStateAndGetResponse(nextState);
+		
+		return nowResponse;
+		
 		
 	}
 
-	/*
-	 * new for assignment 5
-	 * 
-	 * [Input] A Hashtable<String, String> returned by extractSlotValues() in
-	 * SlotFiller.java
-	 * 
-	 * [Output] A string that list all the extracted slot values
-	 * 
-	 */
 	private String slotTableToString(Hashtable<String, String> extractedSlotValues) {
 		
 		String result = " (";
