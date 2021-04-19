@@ -13,7 +13,7 @@ public class HealthcareState extends AbstractDialogueState {
 	public String executeAndGetResponse(List<String> domainHistory, List<String> intentHistory,
 			List<Hashtable<String, String>> slotHistory) {
 		
-		/*
+		
 		if(slotHistory.size()>0) {
 			String latestLocation = null;
 			for(int i=0;i<slotHistory.size();i++) {
@@ -31,14 +31,15 @@ public class HealthcareState extends AbstractDialogueState {
 		}else {//no history
 			return "WeatherState ASK LOCATION (NO HISTORY)";
 		}
-		*/
 		
 		
+		/*
 		if(super.hasSlotValue("location", slotHistory)) {
 			return "WeatherState HAS LOCATION, RESPOND";
 		}else {
 			return "WeatherState ASK LOCATION";
 		}
+		*/
 	
 		
 	}

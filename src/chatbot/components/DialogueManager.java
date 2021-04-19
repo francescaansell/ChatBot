@@ -89,24 +89,16 @@ public class DialogueManager {
 			//String prevIntent = intentHistory.get(intentHistory.size()-2);
 			String prevDomain = domainHistory.get(domainHistory.size()-2);
 			System.out.println(prevDomain+" -> "+latestDomain);
-			if(prevDomain.equals(latestDomain)) {//Other->Other; Weather->Weather; Food->Food
-				//just stay at the same state
+			if(prevDomain.equals(latestDomain)) {
 				return lastestState;
-			}else if(latestDomain.equals("Other")){//Weather->Other; Food->Other; etc
-				//just stay at the same state
+			}else if(latestDomain.equals("Other")){
 				return lastestState;
-			}else {//domain changed to an non-Other state
-				if(latestDomain.equals("HealthcareState")) {//Start->Weather; Food->Weather
-					return "HealthcareState";
-				}else {//Start->Food; Weather->Food
-					return "StartState";
-				}
+			}else {
+			    return "HealthcareState";	
 			}
-		}else {//we only have an initial state, go to whatever the latest state is
-			if(latestDomain.equals("Weather")) {
-				return "WeatherState";
-			}else if(latestDomain.equals("Food")) {
-				return "FoodState";
+		}else {
+			if(latestDomain.equals("Healthcare")) {
+				return "HealthcareState";
 			}else {
 				return lastestState;
 			}

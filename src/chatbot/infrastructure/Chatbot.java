@@ -31,6 +31,8 @@ public class Chatbot {
 		this.healthcareIntentClassifier = new HealthcareIntentClassifier();
 
 		this.nowSlotFiller = new SlotFiller();
+
+        this.nowDialogueManager = new DialogueManager();
 	
 	}
 	
@@ -42,23 +44,21 @@ public class Chatbot {
 		System.out.println("Domain: "+nowDomain);
 		String nowIntent = "";
 		Hashtable<String, String> extractedSlotValues = null;
-		if(!nowDomain.equals("Other")) {//in-domain message
+        extractedSlotValues = nowSlotFiller.extractSlotValues(nowInputText);
 
-			extractedSlotValues = nowSlotFiller.extractSlotValues(nowInputText);
+		if(!nowDomain.equals("Other")) {
 
 			if(nowDomain.equals("Healthcare")) {//Healthcare domain
 
 				nowIntent = healthcareIntentClassifier.getLabel(nowInputText);
-				String nowResponse = "domain = "+nowDomain+", intent = "+nowIntent;
-				nowResponse += slotTableToString(extractedSlotValues);
-				return nowResponse;	
+				
 			}else {//this shouldn't happen
 				System.err.println("Domain name is incorrect!");
 				System.exit(1);
 				return null;
 
 			}
-		}else {//out-of-domain message
+		} else {//out-of-domain message
 			//return "This message is out of the domains of the chatbot.";
 		}
 
