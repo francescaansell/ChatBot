@@ -101,7 +101,7 @@ public class SlotFiller {
 		ArrayList<String> dates = new ArrayList<>();
 	
 		//A date is month + "/" + day + "/" + year
-		for(int tempYear= 1960; tempYear <= 2021; tempYear ++) {
+		for(int tempYear= 2021; tempYear <= 2023; tempYear ++) {
 			for(int tempMonth=1; tempMonth<=12; tempMonth++){
 				if(tempMonth == 2){
 					//Febuary has 28 days

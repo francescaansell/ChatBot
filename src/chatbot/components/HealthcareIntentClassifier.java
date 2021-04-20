@@ -1,5 +1,7 @@
 package chatbot.components;
 
+import java.util.ArrayList;
+
 public class HealthcareIntentClassifier {
 	
 	private static String[] intentDictionary;
@@ -41,7 +43,10 @@ public class HealthcareIntentClassifier {
         }
 
 		//Intent 1 appointment
-        String[] appointmentDictionary  = new String[] {"appointment", "sceduale"};
+		ArrayList<String> appointmentDictionary = generateDates();
+        //String[] appointmentDictionary  = new String[] {"appointment", "schedule"};
+		appointmentDictionary.add("appointment");
+		appointmentDictionary.add("schedule");
 		for(String appointmentKeyword: appointmentDictionary) {
 			if (nowInputText.toLowerCase().indexOf(appointmentKeyword.toLowerCase())>=0) {
 				scoreArray[0] = new Double(scoreArray[0])+1;
@@ -49,7 +54,11 @@ public class HealthcareIntentClassifier {
 		}
 
 		//Intent 2 refill
-		String[] refillDictionary = new String[] {"refill", "prescription"};
+		String[] refillDictionary = new String[] {"refill", "prescription","Levothyroxine", "Lisinopril", "Atorvastatin", "Metformin", "Amlodipine", "Metoprolol", 
+		"Omeprazole", "Simvastatin", "Losartan", "Albuterol", "Gabapentin", "Hydrochlorothiazide", "Hydrocodone", "Zoloft", "Furosemide", "Celexa", 
+		"Xanax", "Acetaminophen", "Insulin glargine", "Trazodone", "Montelukast", "Protonix", "Lexapro", "Pravachol", "Bupropion", "Prozac", "Carvedilol", 
+		"Prednisone", "Flomax", "Potassium", "Clopidogrel", "Klonopin", "Zolpidem", "Tramadol", "Rosuvastatin", "Meloxicam", "Propranolol", "Glipizide", "Zantac", 
+		"Zithromax", "Cymbalta" , "Methylphenidate" };
 		for(String refillKeyword: refillDictionary) {
 			if (nowInputText.toLowerCase().indexOf(refillKeyword.toLowerCase())>=0) {
 				scoreArray[1] = new Double(scoreArray[1])+1;
@@ -100,6 +109,41 @@ public class HealthcareIntentClassifier {
 		}
 		System.out.println(")");
 		return intentDictionary[nowMaxIndex];
+	}
+	public ArrayList<String> generateDates() {
+		ArrayList<String> dates = new ArrayList<>();
+	
+		//A date is month + "/" + day + "/" + year
+		for(int tempYear= 2021; tempYear <= 2023; tempYear ++) {
+			for(int tempMonth=1; tempMonth<=12; tempMonth++){
+				if(tempMonth == 2){
+					//Febuary has 28 days
+					for(int tempDay=1; tempDay<=28; tempDay ++){
+						String tempDate = tempMonth + "/" + tempDay + "/" + tempYear;
+						dates.add(tempDate);
+					}
+				} else if(tempMonth % 2 != 0 ){
+					//if a month is odd it has 31 days
+					for(int tempDay=1; tempDay<= 31; tempDay++){
+						String tempDate = tempMonth + "/" + tempDay + "/" + tempYear;
+						dates.add(tempDate);
+					}
+				} else if (tempMonth % 2 ==0){
+					//if a month is even it has 30 days
+					for(int tempDay = 1; tempDay<=30; tempDay++){
+						String tempDate = tempMonth + "/" + tempDay + "/" + tempYear;
+						dates.add(tempDate);
+					}
+				}
+				/*
+				for(String date: dates){
+					System.out.println("DATE: " + date);
+				}
+				*/
+			}
+	
+		}
+		return dates;
 	}
 }
 

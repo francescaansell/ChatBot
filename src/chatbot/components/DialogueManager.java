@@ -5,7 +5,9 @@ import java.util.Hashtable;
 import java.util.List;
 
 import chatbot.state.AbstractDialogueState;
-import chatbot.state.HealthcareState;
+import chatbot.state.FindPhysicanState;
+import chatbot.state.AppointmentState;
+import chatbot.state.RefillState;
 import chatbot.state.StartState;
 
 
@@ -45,7 +47,9 @@ public class DialogueManager {
 		 * Task: Put dialogue state in the table 
 		 */
 
-		dialogueStateTable.put("HealthcareState", new HealthcareState());
+		dialogueStateTable.put("AppointmentState", new AppointmentState());
+		dialogueStateTable.put("RefillState", new RefillState());
+		dialogueStateTable.put("FindPhysicanState", new FindPhysicanState());
 		dialogueStateTable.put("StartState", new StartState());
 		
 		
@@ -79,30 +83,51 @@ public class DialogueManager {
 		
 		String lastestState = dialogueStateHistory.get(dialogueStateHistory.size()-1);
 		
-		//String latestIntent = intentHistory.get(intentHistory.size()-1);
+		String latestIntent = intentHistory.get(intentHistory.size()-1);
 		String latestDomain = domainHistory.get(domainHistory.size()-1);
 		//Hashtable<String, String> latestSlotValues = slotHistory.get(slotHistory.size()-1);
 		
 		//modify the following logistics to decide when to go to which dialogue state
 		
+		//If their is more than one state history
 		if(dialogueStateHistory.size()>1) {
-			//String prevIntent = intentHistory.get(intentHistory.size()-2);
+			String prevIntent = intentHistory.get(intentHistory.size()-2);
 			String prevDomain = domainHistory.get(domainHistory.size()-2);
+			
 			System.out.println(prevDomain+" -> "+latestDomain);
-			if(prevDomain.equals(latestDomain)) {
-				return lastestState;
-			}else if(latestDomain.equals("Other")){
-				return lastestState;
-			}else {
-			    return "HealthcareState";	
+
+			//If the previous Domain is equal to the latest Domain
+			if (prevDomain.equals(latestDomain)){
+				return lastestState; 
+			
 			}
+			else if(prevIntent.equals(latestIntent)) {
+				return lastestState;
+
+			
+			}else if(latestDomain.equals("Other")){
+				return "StartState";
+			}else if(latestIntent.equals("Refill")){
+			    return "RefillState";	
+			}else if(latestIntent.equals("FindPhysican")){
+				return "FindPhysicanState";
+			}else if(latestIntent.equals("Appointment")){
+				return "AppointmentState";
+			}
+		//If there is no state history
 		}else {
-			if(latestDomain.equals("Healthcare")) {
-				return "HealthcareState";
-			}else {
+			if(latestIntent.equals("Refill")) {
+				return "RefillState";
+			}else if(latestIntent.equals("FindPhysican")){
+				return "FindPhysicanState";
+			}else if(latestIntent.equals("Appointment")){
+				return "AppointmentState";
+			}
+			else {
 				return lastestState;
 			}
 		}
+		return "RefillState";
 		
 		
 	}

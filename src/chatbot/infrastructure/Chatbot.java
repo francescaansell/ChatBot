@@ -51,6 +51,7 @@ public class Chatbot {
 			if(nowDomain.equals("Healthcare")) {//Healthcare domain
 
 				nowIntent = healthcareIntentClassifier.getLabel(nowInputText);
+				System.out.println("Intent: " +nowIntent);
 				
 			}else {//this shouldn't happen
 				System.err.println("Domain name is incorrect!");
@@ -63,6 +64,9 @@ public class Chatbot {
 		}
 
 		//Dialogue Management
+		/** Dialoguge Manager is responsible for getting the next dialouge state
+		 	Once you have the name you give it to the getNextState and GetResponse methods
+		 **/
 		String nextState = nowDialogueManager.getNextState(nowDomain, nowIntent, extractedSlotValues);
 		String nowResponse = nowDialogueManager.executeStateAndGetResponse(nextState);
 		
