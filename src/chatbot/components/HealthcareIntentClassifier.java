@@ -58,7 +58,12 @@ public class HealthcareIntentClassifier {
 		"Omeprazole", "Simvastatin", "Losartan", "Albuterol", "Gabapentin", "Hydrochlorothiazide", "Hydrocodone", "Zoloft", "Furosemide", "Celexa", 
 		"Xanax", "Acetaminophen", "Insulin glargine", "Trazodone", "Montelukast", "Protonix", "Lexapro", "Pravachol", "Bupropion", "Prozac", "Carvedilol", 
 		"Prednisone", "Flomax", "Potassium", "Clopidogrel", "Klonopin", "Zolpidem", "Tramadol", "Rosuvastatin", "Meloxicam", "Propranolol", "Glipizide", "Zantac", 
-		"Zithromax", "Cymbalta" , "Methylphenidate" };
+		"Zithromax", "Cymbalta" , "Methylphenidate" , "Philadelphia" , "Pittsburgh", "Allentown", "Erie", "Reading", "Bethlehem", "Scranton", 
+		"Lancaster", "Harrisburgh", "York", "Altoona", "Wildes-Barre", "Chester", "Williamsport", "McCandless", "Easton", "Lebanon", "Hazleton", 
+		"New Castle", "Johnstown", "McKeesport", "Hermitage", "Hermitage", "Bloomsburg", "Greensburg", "Washington", "Pottsvilla", "Sharon", "Coatesvilla", 
+		"Butler", "Meadville", "New Kensington", "St. Marys", "Lower Burrell", "Nanticoke", "Oil City", "Uniontown", "Sunburry", "Lock Haven", "Warren", 
+		"Jeannette", "Aligquippa", "Du Bois", "Carbondale", "Latrobe", "Beaver Falls", "Bradford", "Pittston", "connellsville", "Monessen", "Shamokin", 
+		"Clariton", "Corry", "Franklin", "Duqeusne", "Titusville", "Arnold", "Farrell", "Monongahela", "Parker"};
 		for(String refillKeyword: refillDictionary) {
 			if (nowInputText.toLowerCase().indexOf(refillKeyword.toLowerCase())>=0) {
 				scoreArray[1] = new Double(scoreArray[1])+1;
@@ -68,7 +73,12 @@ public class HealthcareIntentClassifier {
 		//Intent 3 findPhysican
         String[] findPhysicanDictionary = new String[] {"doctor", "find a doctor", "Family", "Primary Care", "Internal Medicine", "Pediatrician", "Gynecologist", "Surgeon", "Psychiatrist", "Cardiologist", 
 		"Dermatologist", "Endocrinologist", "Gastroenterologist", "Infectious Disease", "Nephrologist", "Ophthalmaologist", "Otaolargyngologist", "Pulmonologist", 
-		"Neurologist", "Oncologist"};
+		"Neurologist", "Oncologist", "Philadelphia" , "Pittsburgh", "Allentown", "Erie", "Reading", "Bethlehem", "Scranton", 
+		"Lancaster", "Harrisburgh", "York", "Altoona", "Wildes-Barre", "Chester", "Williamsport", "McCandless", "Easton", "Lebanon", "Hazleton", 
+		"New Castle", "Johnstown", "McKeesport", "Hermitage", "Hermitage", "Bloomsburg", "Greensburg", "Washington", "Pottsvilla", "Sharon", "Coatesvilla", 
+		"Butler", "Meadville", "New Kensington", "St. Marys", "Lower Burrell", "Nanticoke", "Oil City", "Uniontown", "Sunburry", "Lock Haven", "Warren", 
+		"Jeannette", "Aligquippa", "Du Bois", "Carbondale", "Latrobe", "Beaver Falls", "Bradford", "Pittston", "connellsville", "Monessen", "Shamokin", 
+		"Clariton", "Corry", "Franklin", "Duqeusne", "Titusville", "Arnold", "Farrell", "Monongahela", "Parker"};
 		for(String findPhyiscanKeyword: findPhysicanDictionary) {
 			if (nowInputText.toLowerCase().indexOf(findPhyiscanKeyword.toLowerCase())>=0) {
 				scoreArray[2] = new Double(scoreArray[2])+1;

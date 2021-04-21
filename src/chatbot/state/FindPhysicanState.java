@@ -20,17 +20,22 @@ public class FindPhysicanState extends AbstractDialogueState {
 			//Iterate over end to get most recent slot history
 			for(int i=0;i<slotHistory.size();i++) {
 				int nowIndex = slotHistory.size()-1-i;
-
 				//This may produce an error if there is both and one before other etc. 
 				if(slotHistory.get(nowIndex)!=null&&slotHistory.get(nowIndex).get("RelativeCity")!=null) {
 					latestLocation = slotHistory.get(nowIndex).get("RelativeCity");			
-					
-				} else if (slotHistory.get(nowIndex) != null && slotHistory.get(nowIndex).get("RelativeSpecialty") != null ) {
+					break;
+				}
+			}
+			for(int i=0;i<slotHistory.size();i++){
+				int nowIndex = slotHistory.size()-1-i;
+				if(slotHistory.get(nowIndex)!=null&&slotHistory.get(nowIndex).get("RelativeSpecialty")!=null){
 					latestPhysican = slotHistory.get(nowIndex).get("RelativeSpecialty");
+					break;
 				}
 			}
 
 			if(latestLocation!=null && latestPhysican != null) {
+				intentHistory.clear();
 				return "Okay, Let me find you a " + latestPhysican + " in " + latestLocation + ".";
 			}else if (latestLocation != null && latestPhysican == null){
 				return "Okay, I know you are in " + latestLocation + " but what type of Phsyican do you want to see?";

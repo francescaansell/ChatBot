@@ -2,7 +2,9 @@ package chatbot.state;
 
 import java.util.Hashtable;
 import java.util.List;
+
 public abstract class AbstractDialogueState {
+	
 
 	public abstract String executeAndGetResponse(List<String> domainHistory, List<String> intentHistory,
 			List<Hashtable<String, String>> slotHistory);

@@ -20,18 +20,23 @@ public class AppointmentState extends AbstractDialogueState {
 			//Iterate over end to get most recent slot history
 			for(int i=0;i<slotHistory.size();i++) {
 				int nowIndex = slotHistory.size()-1-i;
-
 				//This may produce an error if there is both and one before other etc. 
 				if(slotHistory.get(nowIndex)!=null&&slotHistory.get(nowIndex).get("RelativeCity")!=null) {
 					latestLocation = slotHistory.get(nowIndex).get("RelativeCity");			
-					
-				} else if (slotHistory.get(nowIndex) != null && slotHistory.get(nowIndex).get("RelativeDate") != null ) {
+					break;
+				}
+			}
+			for(int i=0;i<slotHistory.size();i++){
+				int nowIndex = slotHistory.size()-1-i;
+				if(slotHistory.get(nowIndex)!=null&&slotHistory.get(nowIndex).get("RelativeDate")!=null){
 					latestDate = slotHistory.get(nowIndex).get("RelativeDate");
+					break;
 				}
 			}
 
 			if(latestLocation!=null && latestDate != null) {
-				return "Okay, Let me schedule you an appointment on " + latestDate + " in " + latestLocation + ".";
+				intentHistory.clear();
+				return "Okay, Let me schedule you an appointment on " + latestDate + " in " + latestLocation + ".";	
 			}else if (latestLocation != null && latestDate == null){
 				return "Okay, I know you are in " + latestLocation + ", but what when should I schedule your appointment?";
 			}else if (latestLocation == null && latestDate != null){
