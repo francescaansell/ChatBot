@@ -1,4 +1,4 @@
-package ist361.chatbot.component;
+package chatbot.components;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
