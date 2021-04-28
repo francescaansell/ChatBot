@@ -2,17 +2,20 @@ package chatbot.state;
 
 import java.util.Hashtable;
 import java.util.List;
+import chatbot.components.ResponseGenerator;
 
 public class StartState extends AbstractDialogueState {
 	
+	
 	public StartState() {
 		super();
+		
 	}
 
 	@Override
 	public String executeAndGetResponse(List<String> domainHistory, List<String> intentHistory,
 			List<Hashtable<String, String>> slotHistory) {
-		return "Hi! I can schedule an appiointment, find you a doctor, or refill a prescription";
+				return ResponseGenerator.getResponseInEnglish("StartState", null, null, null, null);
 	}
 
 }

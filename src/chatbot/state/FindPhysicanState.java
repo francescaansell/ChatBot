@@ -3,6 +3,8 @@ package chatbot.state;
 import java.util.Hashtable;
 import java.util.List;
 
+import chatbot.components.ResponseGenerator;
+
 public class FindPhysicanState extends AbstractDialogueState {
 	
 	public FindPhysicanState() {
@@ -35,14 +37,14 @@ public class FindPhysicanState extends AbstractDialogueState {
 			}
 
 			if(latestLocation!=null && latestPhysican != null) {
-				intentHistory.clear();
-				return "Okay, Let me find you a " + latestPhysican + " in " + latestLocation + ".";
+		
+				return ResponseGenerator.getResponseInEnglish("FindPhsyicanState", "RESPOND", domainHistory, intentHistory, slotHistory);
 			}else if (latestLocation != null && latestPhysican == null){
-				return "Okay, I know you are in " + latestLocation + " but what type of Phsyican do you want to see?";
+				return ResponseGenerator.getResponseInEnglish("FindPhsyicanState", "ASK SPECIALTY", domainHistory, intentHistory, slotHistory);
 			}else if (latestLocation == null && latestPhysican != null){
-				return "Okay, I know you want to see a " + latestPhysican + " but what city are you are in?";
+				return ResponseGenerator.getResponseInEnglish("FindPhsyicanState", "ASK CITY", domainHistory, intentHistory, slotHistory);
 			}else if (latestLocation == null && latestPhysican == null){
-				return "Okay, what type of phsyican do you want to see and what city are you in?";
+				return ResponseGenerator.getResponseInEnglish("FindPhsyicanState", "ASK SPECIALTY AND CITY", domainHistory, intentHistory, slotHistory);
 			} else {
 				return "I am not sure.";
 			}

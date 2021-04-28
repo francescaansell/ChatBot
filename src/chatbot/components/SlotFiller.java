@@ -82,7 +82,7 @@ public class SlotFiller {
 
 		//I used most common specialties
 		//https://www.verywellhealth.com/types-of-doctors-1736311
-		String[] relativeSpecialties = new String[] {"Family", "Primary Care", "Internal Medicine", "Pediatrician", "Gynecologist", "Surgeon", "Psychiatrist", "Cardiologist", 
+		String[] relativeSpecialties = new String[] {"Family Doctor", "Primary Care Doctor", "Internal Medicine", "Pediatrician", "Gynecologist", "Surgeon", "Psychiatrist", "Cardiologist", 
 			"Dermatologist", "Endocrinologist", "Gastroenterologist", "Infectious Disease", "Nephrologist", "Ophthalmaologist", "Otaolargyngologist", "Pulmonologist", 
 			"Neurologist", "Oncologist" };
 		for(String nowRelativeSpecialty: relativeSpecialties) {

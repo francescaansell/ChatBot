@@ -54,7 +54,7 @@ public class HealthcareIntentClassifier {
 		}
 
 		//Intent 2 refill
-		String[] refillDictionary = new String[] {"refill", "prescription","Levothyroxine", "Lisinopril", "Atorvastatin", "Metformin", "Amlodipine", "Metoprolol", 
+		String[] refillDictionary = new String[] {"refill", "prescription", "medication", "Levothyroxine", "Lisinopril", "Atorvastatin", "Metformin", "Amlodipine", "Metoprolol", 
 		"Omeprazole", "Simvastatin", "Losartan", "Albuterol", "Gabapentin", "Hydrochlorothiazide", "Hydrocodone", "Zoloft", "Furosemide", "Celexa", 
 		"Xanax", "Acetaminophen", "Insulin glargine", "Trazodone", "Montelukast", "Protonix", "Lexapro", "Pravachol", "Bupropion", "Prozac", "Carvedilol", 
 		"Prednisone", "Flomax", "Potassium", "Clopidogrel", "Klonopin", "Zolpidem", "Tramadol", "Rosuvastatin", "Meloxicam", "Propranolol", "Glipizide", "Zantac", 

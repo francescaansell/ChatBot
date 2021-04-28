@@ -3,15 +3,15 @@ package chatbot.state;
 import java.util.Hashtable;
 import java.util.List;
 
+import chatbot.components.ResponseGenerator;
+
 public class RefillState extends AbstractDialogueState {
 	
 	public RefillState() {
 		super();
 	}
 
-	/**
-	 * slotHistory lists that stores every slot value that has been extracted from user input
-	 */
+	
 	@Override
 	public String executeAndGetResponse(List<String> domainHistory, List<String> intentHistory, List<Hashtable<String, String>> slotHistory) {
 	
@@ -38,14 +38,13 @@ public class RefillState extends AbstractDialogueState {
 		
 
 			if(latestLocation!=null && latestRefill != null) {
-				intentHistory.clear();
-				return "Okay, Let me refill " + latestRefill + " in " + latestLocation + ".";
+				return ResponseGenerator.getResponseInEnglish("RefillState", "RESPOND", domainHistory, intentHistory, slotHistory);
 			}else if (latestLocation != null && latestRefill == null){
-				return "Okay, I know you are in " + latestLocation + ", but what type of medication do you want me to refill?";
+				return ResponseGenerator.getResponseInEnglish("RefillState", "ASK PRESCRIPTION", domainHistory, intentHistory, slotHistory);
 			}else if (latestLocation == null && latestRefill != null){
-				return "Okay, I know you want to refill " + latestRefill + ", but what city are you are in?";
+				return ResponseGenerator.getResponseInEnglish("RefillState", "ASK CITY", domainHistory, intentHistory, slotHistory);
 			}else if (latestLocation == null && latestRefill == null){
-				return "Okay, what type of medication do you want to refill, and what city are you in?";
+				return ResponseGenerator.getResponseInEnglish("RefillState", "ASK PRESCRIPTION AND CITY", domainHistory, intentHistory, slotHistory);
 			} else {
 				return "I am not sure.";
 			}

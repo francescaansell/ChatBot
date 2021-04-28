@@ -56,7 +56,7 @@ public class ChatbotGUI extends JFrame {
 		nowGUIFrame.setVisible(true);
 		nowGUIFrame.setResizable(false);
 		nowGUIFrame.setLayout(null);
-		nowGUIFrame.setSize(640, 600);
+		nowGUIFrame.setSize(640, 900);
 		nowGUIFrame.setTitle("Chatbot "+nowChatbot.getBotName()+"");
 		nowGUIFrame.getContentPane().setBackground(blueCrayola);
 
